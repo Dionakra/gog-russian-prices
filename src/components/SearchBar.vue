@@ -11,11 +11,8 @@
 </template>
 
 <script>
-import Vue from 'vue'
 import Cart from './Cart'
 import { debounce } from 'lodash'
-
-window.Event = new Vue()
 
 export default {
   name: 'search-bar',
@@ -29,7 +26,7 @@ export default {
   },
   methods: {
     search: debounce(function () {
-      Event.$emit('searchGame', this.searchText)
+      this.$bus.$emit('searchGame', this.searchText)
     }, 500)
   }
 }
@@ -38,6 +35,5 @@ export default {
 <style scoped>
 div#search{
   padding-top: 8px;
-
 }
 </style>

@@ -8,6 +8,16 @@ import store from './store'
 import './assets/css/semantic.min.css'
 
 Vue.config.productionTip = false
+
+const EventBus = new Vue()
+Object.defineProperties(Vue.prototype, {
+  $bus: {
+    get: function () {
+      return EventBus
+    }
+  }
+})
+
 Vue.use(VueLazyload, {
   preLoad: 1.3,
   attempt: 1,
