@@ -8,7 +8,7 @@
     <div v-else>
       <div class="ui labeled button">
         <div class="ui green button">
-          <i class="euro icon"></i> Savings
+          <i class="dollar icon"></i> Savings
         </div>
         <a class="ui basic green left pointing label">
           {{getSavings}}
@@ -25,7 +25,7 @@
           <tr><th>Game</th>
           <th>Price <i class="flag ru"></i></th>
           <th>Price <i class="flag es"></i></th>
-          <th>Savings <i class="ui icon euro"></i></th>
+          <th>Savings <i class="ui icon dollar"></i></th>
         </tr></thead>
         <tbody>
           <tr v-for="game in getCart" :key="game.url">
