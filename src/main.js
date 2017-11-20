@@ -5,7 +5,7 @@ import App from './App'
 import VueLazyload from 'vue-lazyload'
 import router from './router'
 import store from './store'
-import './assets/css/semantic.min.css'
+import '../node_modules/semantic-ui-css/semantic.min.css'
 
 Vue.config.productionTip = false
 
