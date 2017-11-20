@@ -17,6 +17,7 @@
 import Header from './components/Header.vue'
 import SearchBar from './components/SearchBar.vue'
 import GameList from './components/GameList.vue'
+import CartList from './components/CartList.vue'
 
 export default {
   name: 'app',
@@ -24,7 +25,7 @@ export default {
     'header-gog': Header,
     'search-bar': SearchBar,
     'game-list': GameList,
-    'cart-list': () => import('./components/CartList.vue')
+    'cart-list': CartList
   }
 }
 </script>
