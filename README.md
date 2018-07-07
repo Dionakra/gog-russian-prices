@@ -17,7 +17,7 @@ $ npm run dev
 ## Build
 The template is build under Webpack, so you can generate a folder with the minified static content. In order to do so you just run:
 ``` bash
-$ npm run build
+$ npm run generate
 ```
 
 This will generate a ```dist``` folder that contains all your application, minified and ready for deployment.
@@ -30,11 +30,8 @@ $ firebase deploy
 ```
 
 ## Built with
-* [Firebase](https://www.npmjs.com/package/firebase) - Cloud Database
 * [Lodash](https://github.com/lodash/lodash) - Functionalities tool
 * [Vue.js 2.0](https://vuejs.org/) - Frontend Framework
 * [vue-infinite-scroll](https://github.com/ElemeFE/vue-infinite-scroll) - Load content as the user scrolls down
-* [vue-lazyload](https://github.com/hilongjw/vue-lazyload) - Lazy loading the images for better performance
-* [vue-router](https://github.com/vuejs/vue-router) - Official VueJS router for SPAs.
-* [vuex](https://github.com/vuejs/vuex) - Centralized state management for Vue
+* [Nuxt](https://nuxtjs.org/) - SSR provider
 * [vuex-persitedstate](https://github.com/robinvdvleuten/vuex-persistedstate) - Persisting tool for Vuex. Prevent Vuex to lose its information when the browser has been refreshed.
