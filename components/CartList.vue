@@ -10,7 +10,7 @@
         <div class="ui green button">
           <i class="dollar icon"></i> Savings
         </div>
-        <a class="ui basic green left pointing label">
+        <a class="ui basic left pointing label">
           {{getSavings}}
         </a>
       </div>
@@ -47,10 +47,8 @@
 
 <script>
 import Vue from 'vue'
-import { round } from 'lodash'
+import round from 'lodash/round'
 import { mapGetters, mapActions } from 'vuex'
-
-window.Event = new Vue()
 
 export default {
   name: 'cart-list',
@@ -66,7 +64,7 @@ export default {
     }
   },
   created () {
-    Event.$on('toggleCart', () => {
+   this.$root.$on('toggleCart', () => {
       this.show = !this.show
     })
   },

@@ -9,7 +9,6 @@
 import Vue from 'vue'
 import { mapGetters } from 'vuex'
 
-window.Event = new Vue()
 
 export default {
   name: 'cart',
@@ -20,7 +19,7 @@ export default {
   },
   methods: {
     toggleCart () {
-      Event.$emit('toggleCart')
+      this.$root.$emit('toggleCart')
     }
   }
 

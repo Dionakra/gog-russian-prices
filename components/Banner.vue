@@ -1,7 +1,7 @@
 <template>
   <div id="header">
     <h2 class="ui header centered">
-      <img alt="logo" src="../assets/logo.png">
+      <img alt="logo" src="~/static/logo.png">
       <div class="content">
         GOG Russian Prices
         <div class="sub header">Where you can save on GOG.com</div>
@@ -12,7 +12,7 @@
 
 <script>
 export default {
-  name: 'header'
+  name: 'banner'
 }
 </script>
 

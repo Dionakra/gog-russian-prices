@@ -1,10 +1,10 @@
 <template>
-  <div class="card">
+  <div class="card" :class="{green: inCart}">
     <div class="ui fluid image">
       <div v-if="game.isDiscounted" class="ui custom-blue ribbon label">
         Sale
       </div>
-      <img alt="game photo" v-lazy="img">
+      <img alt="game photo" :src="img">
     </div>
 
     <div class="content">
@@ -40,7 +40,8 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
+import some from 'lodash/some'
 
 export default {
   name: 'game',
@@ -50,16 +51,24 @@ export default {
       game: this.info
     }
   },
-  methods:
-    mapActions([
+  methods: {
+    ...mapGetters({
+      getSavings: 'getSavings',
+      getCart: 'getCart'
+    }),
+    ...mapActions([
       'addToCart'
-    ]),
+    ])
+  },
   computed: {
     img () {
       return this.game.image + '_200.jpg'
     },
     gogURL () {
       return 'https://www.gog.com' + this.game.url
+    },
+    inCart () {
+      return some(this.getCart(), elem => elem.url == this.info.url)
     }
   }
 }

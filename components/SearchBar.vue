@@ -2,7 +2,12 @@
   <div class="ui centered grid">
     <div id="search" class="ui search middle aligned content">
       <div class="ui icon input">
-        <input aria-label="search" class="prompt" type="text" v-model="searchText" @keyup="search"   placeholder="Search game...">
+        <input aria-label="search" 
+              class="prompt" 
+              type="text" 
+              v-model="searchText" 
+              @keyup="search" 
+              placeholder="Search game...">
         <i class="search icon"></i>
       </div>
     </div>
@@ -12,7 +17,7 @@
 
 <script>
 import Cart from './Cart'
-import { debounce } from 'lodash'
+import debounce from 'lodash/debounce'
 
 export default {
   name: 'search-bar',
@@ -26,7 +31,7 @@ export default {
   },
   methods: {
     search: debounce(function () {
-      this.$bus.$emit('searchGame', this.searchText)
+      this.$root.$emit('searchGame', this.searchText)
     }, 500)
   }
 }
