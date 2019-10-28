@@ -1,5 +1,5 @@
 <template>
-  <div class="card" :class="{green: inCart}">
+  <div class="card">
     <div class="ui fluid image">
       <div v-if="game.isDiscounted" class="ui custom-blue ribbon label">
         Sale
@@ -26,9 +26,6 @@
       </div>
     </div>
     <div class="extra content">
-      <span class="right floated" @click="addToCart(game)">
-        <i class="large add to cart icon addToCart"></i>
-      </span>
       <span>
         <a class="gog-link" target="noopener" :href="gogURL">
           <i class="large linkify icon"></i>
@@ -40,9 +37,6 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
-import some from 'lodash/some'
-
 export default {
   name: 'game',
   props: ['info'],
@@ -51,24 +45,12 @@ export default {
       game: this.info
     }
   },
-  methods: {
-    ...mapGetters({
-      getSavings: 'getSavings',
-      getCart: 'getCart'
-    }),
-    ...mapActions([
-      'addToCart'
-    ])
-  },
   computed: {
     img () {
       return this.game.image + '_200.jpg'
     },
     gogURL () {
       return 'https://www.gog.com' + this.game.url
-    },
-    inCart () {
-      return some(this.getCart(), elem => elem.url == this.info.url)
     }
   }
 }
@@ -76,9 +58,6 @@ export default {
 
 
 <style scoped>
-i.addToCart:hover {
-  color: #1E824C
-}
 .meta > a {
   color: #000!important
 }

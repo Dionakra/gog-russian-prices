@@ -1,6 +1,6 @@
 module.exports = {
   head: {
-    title: 'GOG Russian prices',
+    title: 'GOG Russian Prices',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -11,7 +11,6 @@ module.exports = {
     ]
   },
   plugins: [
-    { src: '~/plugins/localStorage.js', ssr: false },
     { src: '~/plugins/infiniteScroll.js', ssr: false }
   ],
   css: ['semantic-ui-css/semantic.css'],

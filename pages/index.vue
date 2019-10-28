@@ -1,120 +1,153 @@
 <template>
   <div id="app" class="ui container">
     <!-- HEADER -->
-    <banner-gog></banner-gog>
+    <div id="header">
+      <h2 class="ui header centered">
+        <img alt="logo" src="~/static/logo.png" />
+        <div class="content">
+          GOG Russian Prices
+          <div class="sub header">Where you can save on GOG.com</div>
+        </div>
+      </h2>
+    </div>
+    <!-- END HEADER -->
+
     <div class="ui divider"></div>
 
     <!-- SEARCH BAR -->
-    <search-bar></search-bar>
-    <cart-list></cart-list>
+    <div class="ui centered grid">
+      <div id="search" class="ui search middle aligned content">
+        <div class="ui icon input">
+          <input
+            aria-label="search"
+            class="prompt"
+            type="text"
+            v-model="searchText"
+            @keyup="search"
+            placeholder="Search game..."
+          />
+          <i class="search icon"></i>
+        </div>
+      </div>
+    </div>
+    <!-- END SEARCH BAR -->
+
     <div class="ui divider"></div>
 
+    <!-- GAME LIST -->
     <div id="game-list">
-      <div v-if="searching" class="ui active centered inline loader">
-      </div>
+      <div v-if="searching" class="ui active centered inline loader"></div>
 
-      <h1 v-if="emptySearch" class="ui header centered">
-        No results looking for: {{text}}
-      </h1>
+      <h1
+        v-if="!searching && showing.length == 0"
+        class="ui header centered"
+      >No results looking for: {{searchText}}</h1>
 
-      <div v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="100" class="ui five doubling cards link">
+      <div
+        v-infinite-scroll="loadMore"
+        infinite-scroll-disabled="busy"
+        infinite-scroll-distance="100"
+        class="ui five doubling cards link"
+      >
         <template v-for="game in showing">
           <game :info="game" :key="game.url"></game>
         </template>
       </div>
     </div>
+    <!-- END GAME LIST -->
   </div>
 </template>
 
 <script>
-import Banner from '~/components/Banner.vue'
-import SearchBar from '~/components/SearchBar.vue'
-import CartList from '~/components/CartList.vue'
-import Game from '~/components/Game'
-import axios from 'axios'
-
-import orderBy from 'lodash/orderBy'
-import filter from 'lodash/filter'
-import take from 'lodash/take'
-import includes from 'lodash/includes'
-const PAGE = 20
+import debounce from "lodash/debounce";
+import Game from "~/components/Game";
+import axios from "axios";
+const PAGE = 20;
 
 export default {
-  async asyncData(context) {
-    const { data } = await axios.get('https://gogrussianprices.firebaseio.com/games/.json')
-
-    const gogGames = orderBy(data, 'title')
-    const sales = filter(gogGames, {'isDiscounted': true })
-
+  data() {
     return {
-      gogGames,
-      sales,
-      showing: sales.slice(0, PAGE),
-      listing: sales,
-      searching: false,
-      emptySearch: sales.length == 0
-    }
-  },
-  data () {
-    return {
-      gogGames: [],
-      sales: [],
-      listing: [],
+      games: [],
+      curPage: 1,
+      searchText: "",
       showing: [],
-      searching: false,
-      text: '',
-      busy: false,
-      emptySearch: false
-    }
+      searching: true
+    };
   },
-  name: 'app',
+  name: "app",
   components: {
-    'game': Game,
-    'banner-gog': Banner,
-    'search-bar': SearchBar,
-    'cart-list': CartList
+    game: Game
   },
-  mounted () {
-    this.$root.$on('searchGame', searchText => {
-      this.searching = true
-      this.text = searchText
-
-      if (searchText) {
-        this.listing = filter(this.gogGames, o => {
-          return includes(o.title.toLowerCase(), searchText.toLowerCase())
-        })
-      } else {
-        this.listing = this.sales
-      }
-      this.showing = take(this.listing, PAGE)
-
-      this.searching = false
-      this.emptySearch = this.listing.length === 0
-    })
+  mounted() {
+    axios
+      .get("https://gogrussianprices.firebaseio.com/games/.json")
+      .then(response => {
+        this.games = Object.values(response.data);
+        this.showing = this.filterGames();
+      });
   },
   methods: {
-    loadMore () {
-      this.showing = take(this.listing, this.showing.length + PAGE)
-    }
+    loadMore() {
+      if (!this.searching) {
+        this.curPage++;
+        this.showing = this.filterGames();
+      }
+    },
+    filterGames() {
+      const term = this.searchText;
+      this.searching = true;
+      let res = [];
+      if (this.games) {
+        res = this.games
+          .filter(game => {
+            let res = false;
+
+            if (term) {
+              res = game.title.toLowerCase().includes(term.toLowerCase());
+            } else {
+              res = game.isDiscounted;
+            }
+
+            return res;
+          })
+          .sort((a, b) =>
+            a.title.toLowerCase().localeCompare(b.title.toLowerCase())
+          )
+          .slice(0, PAGE * this.curPage);
+      }
+      this.searching = false;
+      return res;
+    },
+    search: debounce(function() {
+      this.curPage = 1;
+      this.showing = this.filterGames();
+    }, 500)
   }
-}
+};
 </script>
 
 <style>
-.custom-blue{
-  background-color: #2574A9!important;
-  color: #fff!important;
+.custom-blue {
+  background-color: #2574a9 !important;
+  color: #fff !important;
 }
-.custom-green{
-  background-color: #1E824C!important;
-  color: #fff!important;
+.custom-green {
+  background-color: #1e824c !important;
+  color: #fff !important;
 }
 
-.custom-red{
-  background-color: #96281B!important;
-  color: #fff!important;
+.custom-red {
+  background-color: #96281b !important;
+  color: #fff !important;
 }
 div#game-list {
   padding-top: 10px;
+}
+div#header {
+  padding-top: 10px;
+}
+div#search {
+  padding-top: 8px;
+  padding-bottom: 8px;
 }
 </style>
