@@ -13,18 +13,18 @@
     "precommit": "npm run lint"
   },
   "dependencies": {
-    "axios": "^0.18.0",
-    "lodash": "^4.17.10",
-    "nuxt": "^1.0.0",
-    "semantic-ui-css": "^2.3.2",
+    "axios": "^0.18.1",
+    "lodash": "^4.17.15",
+    "nuxt": "^1.4.5",
+    "semantic-ui-css": "^2.4.1",
     "vue-infinite-scroll": "^2.0.2",
-    "vuex-persistedstate": "^2.5.4"
+    "vuex-persistedstate": "^2.6.0"
   },
   "devDependencies": {
-    "babel-eslint": "^8.2.1",
+    "babel-eslint": "^8.2.6",
     "eslint": "^4.15.0",
     "eslint-friendly-formatter": "^3.0.0",
     "eslint-loader": "^1.7.1",
-    "eslint-plugin-vue": "^4.0.0"
+    "eslint-plugin-vue": "^4.7.1"
   }
 }

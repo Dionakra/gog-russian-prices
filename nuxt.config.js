@@ -11,7 +11,6 @@ module.exports = {
     ]
   },
   plugins: [
-    { src: '~/plugins/localStorage.js', ssr: false },
     { src: '~/plugins/infiniteScroll.js', ssr: false }
   ],
   css: ['semantic-ui-css/semantic.css'],
