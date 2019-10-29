@@ -50,7 +50,7 @@
         class="ui five doubling cards link"
       >
         <template v-for="game in showing">
-          <game :info="game" :key="game.url"></game>
+          <game :info="game" :key="game.id"></game>
         </template>
       </div>
     </div>
@@ -80,7 +80,7 @@ export default {
   },
   mounted() {
     axios
-      .get("https://gogrussianprices.firebaseio.com/games/.json")
+      .get("https://gogrussianprices.firebaseio.com/products/.json")
       .then(response => {
         this.games = Object.values(response.data);
         this.showing = this.filterGames();
@@ -103,15 +103,15 @@ export default {
             let res = false;
 
             if (term) {
-              res = game.title.toLowerCase().includes(term.toLowerCase());
+              res = game.t.toLowerCase().includes(term.toLowerCase());
             } else {
-              res = game.isDiscounted;
+              res = game.s;
             }
 
             return res;
           })
           .sort((a, b) =>
-            a.title.toLowerCase().localeCompare(b.title.toLowerCase())
+            a.t.toLowerCase().localeCompare(b.t.toLowerCase())
           )
           .slice(0, PAGE * this.curPage);
       }
