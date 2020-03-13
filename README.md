@@ -1,37 +1,25 @@
-# GOG Russian Prices
-A web-app where you can see GOG Games in their Russian Prices, compare them to Spanish prices and see how much you can save when buying your favourite games on Spain or Russia.
+# GOG Russian Prices 
+A WebApp where you can see the price of a given game on GOG's platform in the Spanish and Russian region, so you can compare the difference in the price and choose where to buy the game.
 
-## Install
+## How does it work?
+Using GitHub actions and a cron job, it obtains the prices for all games from Spanish and Russian regions and saves them in the repo. Using that information, a simple web consumes this data to show the best deals when it comes to regional pricing between those countries
+
+## Development workflow
 ``` bash
-$ git clone https://github.com/Dionakra/gog-russian-prices.git
-$ cd gog-russian-prices
-$ npm install
-```
+# Installation
+git clone https://github.com/Dionakra/gog-russian-prices.git
+cd gog-russian-prices
+npm install
+npm i -g firebase-cli
 
-## Develop
-You can change whatever you want. This Vue template support hot reloading by default, so you really want to start developing with it enabled, so you can run this command to run a development server and see the changes you apply instantly in the browser without reloading the page. Awesome, isn't it?
-``` bash
-$ npm run dev
-```
+# Development with Hot Reloading
+npm run dev
 
-## Build
-The template is build under Webpack, so you can generate a folder with the minified static content. In order to do so you just run:
-``` bash
-$ npm run generate
-```
-
-This will generate a ```dist``` folder that contains all your application, minified and ready for deployment.
-
-## Deploy
-In this project I just used Firebase as Cloud Database and Hosting service. To deploy it to Firebase, you just have to install the Firebase cli and deploy it with your credentials.
-``` bash
-$ npm install -g firebase-cli
-$ firebase deploy
+# Deploying
+npm run build
+firebase deploy
 ```
 
 ## Built with
-* [Lodash](https://github.com/lodash/lodash) - Functionalities tool
-* [Vue.js 2.0](https://vuejs.org/) - Frontend Framework
-* [vue-infinite-scroll](https://github.com/ElemeFE/vue-infinite-scroll) - Load content as the user scrolls down
-* [Nuxt](https://nuxtjs.org/) - SSR provider
-* [vuex-persitedstate](https://github.com/robinvdvleuten/vuex-persistedstate) - Persisting tool for Vuex. Prevent Vuex to lose its information when the browser has been refreshed.
+* [Svelte](https://svelte.dev/) - Frontend Framework
+* [Tailwind](https://tailwindcss.com/) - CSS Framework
