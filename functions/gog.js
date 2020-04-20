@@ -14,8 +14,8 @@ function getGOGGames(maxPages = undefined) {
       const ruGame = ru.find(x => x.id == game.id)
 
       game.pR = {
-        b: ruGame.p.b,
-        f: ruGame.p.f
+        b: ruGame ? ruGame.p.b : -1,
+        f: ruGame ? ruGame.p.f : -1
       }
 
       return game

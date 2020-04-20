@@ -11,5 +11,6 @@ admin.initializeApp({
 exports.getGOGGames = functions.pubsub.schedule('0 1,5,9,13,17,21 * * *').onRun(async (context) => {
   const games = await getGOGGames()
   await admin.database().ref("/products").set(games)
+  await admin.database().ref("/sales").set(games.filter(g => g.s == true))
   await admin.database().ref("/lastRun").set(new Date().toISOString())
 });

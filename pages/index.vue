@@ -7,6 +7,10 @@
         <div class="content">
           GOG Russian Prices
           <div class="sub header">Where you can save on GOG.com</div>
+          <div class="sub header">
+            We are moving to
+            <a href="https://gogputin.web.app">gogputin.web.app</a>
+          </div>
         </div>
       </h2>
     </div>
@@ -78,6 +82,13 @@ export default {
   components: {
     game: Game
   },
+  created() {
+    axios
+      .get("https://gogrussianprices.firebaseio.com/sales/.json")
+      .then(response => {
+        this.showing = this.filterGames(Object.values(response.data));
+      });
+  },
   mounted() {
     axios
       .get("https://gogrussianprices.firebaseio.com/products/.json")
@@ -93,12 +104,14 @@ export default {
         this.showing = this.filterGames();
       }
     },
-    filterGames() {
+    filterGames(collection = undefined) {
       const term = this.searchText;
       this.searching = true;
       let res = [];
-      if (this.games) {
-        res = this.games
+
+      const col = collection || this.games;
+      if (col) {
+        res = col
           .filter(game => {
             let res = false;
 
@@ -110,9 +123,7 @@ export default {
 
             return res;
           })
-          .sort((a, b) =>
-            a.t.toLowerCase().localeCompare(b.t.toLowerCase())
-          )
+          .sort((a, b) => a.t.toLowerCase().localeCompare(b.t.toLowerCase()))
           .slice(0, PAGE * this.curPage);
       }
       this.searching = false;
