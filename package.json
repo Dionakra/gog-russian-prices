@@ -1,33 +1,27 @@
 {
-  "name": "grpn",
+  "name": "gog-russian-prices",
   "version": "1.0.0",
-  "description": "Nuxt.js project",
+  "description": "Compare GOG's prices between Russian and Spanish region (in dollars)",
   "author": "David de los Santos Boix <ddlsb@hotmail.com>",
   "private": true,
   "scripts": {
-    "dev": "nuxt",
-    "build": "nuxt build --spa",
-    "start": "nuxt start",
-    "generate": "nuxt generate",
-    "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
-    "precommit": "npm run lint"
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build"
   },
   "dependencies": {
-    "axios": "^0.19.2",
-    "firebase-admin": "^8.11.0",
-    "firebase-functions": "^3.6.1",
-    "lodash": "^4.17.15",
-    "nuxt": "^2.12.2",
-    "semantic-ui-css": "^2.4.1",
-    "vue-infinite-scroll": "^2.0.2",
-    "vue-virtual-scroller": "^1.0.10"
+    "core-js": "^3.6.4",
+    "vue": "^2.6.11",
+    "vue-infinite-scroll": "^2.0.2"
   },
   "devDependencies": {
-    "babel-eslint": "^10.1.0",
-    "eslint": "^6.8.0",
-    "eslint-friendly-formatter": "^4.0.1",
-    "eslint-loader": "^3.0.4",
-    "eslint-plugin-vue": "^5.2.3",
+    "@vue/cli-plugin-babel": "~4.3.0",
+    "@vue/cli-service": "~4.3.0",
+    "vue-template-compiler": "^2.6.11",
     "firebase-tools": "^8.2.0"
-  }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
 }

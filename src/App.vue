@@ -3,7 +3,7 @@
     <!-- HEADER -->
     <div id="header">
       <h2 class="ui header centered">
-        <img alt="logo" src="~/static/logo.png" />
+        <img alt="logo" src="./assets/logo.png" />
         <div class="content">
           GOG Russian Prices
           <div class="sub header">Where you can save on GOG.com</div>
@@ -64,8 +64,7 @@
 
 <script>
 import debounce from "lodash/debounce";
-import Game from "~/components/Game";
-import axios from "axios";
+import Game from "./components/Game";
 const PAGE = 20;
 
 export default {
@@ -84,17 +83,17 @@ export default {
     game: Game
   },
   created() {
-    axios
-      .get("https://gogrussianprices.firebaseio.com/sales/.json")
-      .then(response => {
-        this.showing = this.filterGames(Object.values(response.data));
+    fetch("https://gogrussianprices.firebaseio.com/sales/.json")
+      .then(response => response.json())
+      .then(data => {
+        this.showing = this.filterGames(Object.values(data));
       });
   },
   mounted() {
-    axios
-      .get("https://gogrussianprices.firebaseio.com/products/.json")
-      .then(response => {
-        this.games = Object.values(response.data);
+    fetch("https://gogrussianprices.firebaseio.com/products/.json")
+      .then(response => response.json())
+      .then(data => {
+        this.games = Object.values(data);
         this.showing = this.filterGames();
       });
     this.showAlt = window.location.href.includes("gog.dionakra");

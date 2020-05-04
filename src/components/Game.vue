@@ -1,10 +1,8 @@
 <template>
-  <div class="card">
+  <div class="card" @click="openLink()">
     <div class="ui fluid image">
-      <div v-if="game.s" class="ui custom-blue ribbon label">
-        Sale
-      </div>
-      <img alt="game photo" :src="img">
+      <div v-if="game.s" class="ui custom-blue ribbon label">Sale</div>
+      <img alt="game photo" :src="img" />
     </div>
 
     <div class="content">
@@ -25,43 +23,41 @@
         </p>
       </div>
     </div>
-    <div class="extra content">
-      <span>
-        <a class="gog-link" target="noopener" :href="gogURL">
-          <i class="large linkify icon"></i>
-          Details
-        </a>
-      </span>
-    </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'game',
-  props: ['info'],
-  data () {
+  name: "game",
+  props: ["info"],
+  data() {
     return {
       game: this.info
+    };
+  },
+  methods: {
+    openLink() {
+      var win = window.open(this.gogURL, "_blank");
+      win.focus();
     }
   },
   computed: {
-    img () {
-      return this.game.i + '_200.jpg'
+    img() {
+      return this.game.i + "_200.jpg";
     },
-    gogURL () {
-      return 'https://www.gog.com' + this.game.u
+    gogURL() {
+      return "https://www.gog.com" + this.game.u;
     }
   }
-}
+};
 </script>
 
 
 <style scoped>
 .meta > a {
-  color: #000!important
+  color: #000 !important;
 }
 .gog-link {
-  color: #000!important;
+  color: #000 !important;
 }
 </style>
