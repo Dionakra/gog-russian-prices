@@ -15,6 +15,7 @@
   "dependencies": {
     "axios": "^0.19.2",
     "firebase-admin": "^8.11.0",
+    "firebase-functions": "^3.6.1",
     "lodash": "^4.17.15",
     "nuxt": "^2.12.2",
     "semantic-ui-css": "^2.4.1",
@@ -26,6 +27,7 @@
     "eslint": "^6.8.0",
     "eslint-friendly-formatter": "^4.0.1",
     "eslint-loader": "^3.0.4",
-    "eslint-plugin-vue": "^5.2.3"
+    "eslint-plugin-vue": "^5.2.3",
+    "firebase-tools": "^8.2.0"
   }
 }
