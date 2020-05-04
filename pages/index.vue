@@ -7,7 +7,7 @@
         <div class="content">
           GOG Russian Prices
           <div class="sub header">Where you can save on GOG.com</div>
-          <div class="sub header">
+          <div v-if="showAlt" class="sub header">
             We are moving to
             <a href="https://gogputin.web.app">gogputin.web.app</a>
           </div>
@@ -75,7 +75,8 @@ export default {
       curPage: 1,
       searchText: "",
       showing: [],
-      searching: true
+      searching: true,
+      showAlt: false
     };
   },
   name: "app",
@@ -88,6 +89,7 @@ export default {
       .then(response => {
         this.showing = this.filterGames(Object.values(response.data));
       });
+
   },
   mounted() {
     axios
@@ -96,6 +98,7 @@ export default {
         this.games = Object.values(response.data);
         this.showing = this.filterGames();
       });
+      this.showAlt = window.location.href.includes("gog.dionakra")
   },
   methods: {
     loadMore() {
