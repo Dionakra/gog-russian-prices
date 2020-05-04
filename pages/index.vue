@@ -89,7 +89,6 @@ export default {
       .then(response => {
         this.showing = this.filterGames(Object.values(response.data));
       });
-
   },
   mounted() {
     axios
@@ -98,7 +97,7 @@ export default {
         this.games = Object.values(response.data);
         this.showing = this.filterGames();
       });
-      this.showAlt = window.location.href.includes("gog.dionakra")
+    this.showAlt = window.location.href.includes("gog.dionakra");
   },
   methods: {
     loadMore() {
