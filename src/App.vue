@@ -66,7 +66,7 @@
 <script>
 import debounce from "lodash/debounce";
 import Game from "./components/Game";
-const PAGE = 20;
+const PAGE = 15;
 
 export default {
   data() {
