@@ -7,6 +7,7 @@
         <div class="content">
           GOG Russian Prices
           <div class="sub header">Where you can save on GOG.com</div>
+          <div v-if="lastUpdated" class="sub header">Last update: {{lastUpdated}}</div>
           <div v-if="showAlt" class="sub header">
             We are moving to
             <a href="https://gogputin.web.app">gogputin.web.app</a>
@@ -75,7 +76,9 @@ export default {
       searchText: "",
       showing: [],
       searching: true,
-      showAlt: false
+      showAlt: false,
+      lastUpdated: undefined,
+      all: false
     };
   },
   name: "app",
@@ -86,16 +89,20 @@ export default {
     fetch("https://gogrussianprices.firebaseio.com/sales/.json")
       .then(response => response.json())
       .then(data => {
+        this.games = Object.values(data)
         this.showing = this.filterGames(Object.values(data));
+      });
+
+    fetch("https://gogrussianprices.firebaseio.com/lastRun/.json")
+      .then(response => response.text())
+      .then(lastUpdated => {
+        const day = lastUpdated.substr(9, 2);
+        const month = lastUpdated.substr(6, 2);
+        const hour = lastUpdated.substr(12, 5);
+        this.lastUpdated = `${day}/${month} - ${hour}`;
       });
   },
   mounted() {
-    fetch("https://gogrussianprices.firebaseio.com/products/.json")
-      .then(response => response.json())
-      .then(data => {
-        this.games = Object.values(data);
-        this.showing = this.filterGames();
-      });
     this.showAlt = window.location.href.includes("gog.dionakra");
   },
   methods: {
@@ -130,7 +137,15 @@ export default {
       this.searching = false;
       return res;
     },
-    search: debounce(function() {
+    search: debounce(async function() {
+      if (!this.all) {
+        const data = await fetch(
+          "https://gogrussianprices.firebaseio.com/products/.json"
+        ).then(response => response.json());
+        this.games = Object.values(data);
+        this.all = true;
+      }
+
       this.curPage = 1;
       this.showing = this.filterGames();
     }, 500)

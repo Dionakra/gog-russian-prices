@@ -2,7 +2,7 @@
   "name": "gog-russian-prices",
   "version": "1.0.0",
   "description": "Compare GOG's prices between Russian and Spanish region (in dollars)",
-  "author": "David de los Santos Boix <ddlsb@hotmail.com>",
+  "author": "David de los Santos Boix",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
