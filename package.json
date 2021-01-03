@@ -10,15 +10,15 @@
     "extract": "node ./src/extract.js"
   },
   "dependencies": {
-    "core-js": "^3.6.4",
-    "vue": "^2.6.11",
+    "core-js": "^3.8.2",
+    "vue": "^2.6.12",
     "vue-infinite-scroll": "^2.0.2"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.3.0",
     "@vue/cli-service": "~4.3.0",
-    "vue-template-compiler": "^2.6.11",
-    "firebase-tools": "^8.2.0"
+    "firebase-tools": "^8.20.0",
+    "vue-template-compiler": "^2.6.12"
   },
   "browserslist": [
     "> 1%",
