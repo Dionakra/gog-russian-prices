@@ -6,20 +6,20 @@
     </div>
 
     <div class="content">
-      <div class="header">{{game.t}}</div>
+      <div class="header">{{game.title}}</div>
       <div class="meta">
-        <a>{{game.c}}</a>
+        <a>{{game.category}}</a>
       </div>
       <div class="description">
         <p>
           <i class="ru flag"></i>
-          <a class="ui custom-green circular label">{{game.pR.f}}</a>
-          <a class="ui custom-red circular label" v-if="game.s">{{game.pR.b}}</a>
+          <a class="ui custom-green circular label">{{game.price.ru}}</a>
+          <a class="ui custom-red circular label" v-if="game.sale">{{game.sale.ru}}</a>
         </p>
         <p>
           <i class="es flag"></i>
-          <a class="ui custom-green circular label">{{game.p.f}}</a>
-          <a class="ui custom-red circular label" v-if="game.s">{{game.p.b}}</a>
+          <a class="ui custom-green circular label">{{game.price.es}}</a>
+          <a class="ui custom-red circular label" v-if="game.sale">{{game.sale.es}}</a>
         </p>
       </div>
     </div>
@@ -43,10 +43,10 @@ export default {
   },
   computed: {
     img() {
-      return this.game.i + "_200.jpg";
+      return this.game.image + "_200.jpg";
     },
     gogURL() {
-      return "https://www.gog.com" + this.game.u;
+      return "https://www.gog.com" + this.game.url;
     }
   }
 };

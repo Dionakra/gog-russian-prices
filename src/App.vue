@@ -66,7 +66,7 @@
 <script>
 import debounce from "lodash/debounce";
 import Game from "./components/Game";
-const PAGE = 15;
+const PAGE = 20;
 
 export default {
   data() {
@@ -86,19 +86,20 @@ export default {
     game: Game
   },
   created() {
-    fetch("https://gogrussianprices.firebaseio.com/sales/.json")
+    fetch("https://raw.githubusercontent.com/Dionakra/gog-russian-prices/master/public/sales.json")
       .then(response => response.json())
       .then(data => {
         this.games = Object.values(data)
         this.showing = this.filterGames(Object.values(data));
       });
 
-    fetch("https://gogrussianprices.firebaseio.com/lastRun/.json")
-      .then(response => response.text())
-      .then(lastUpdated => {
-        const day = lastUpdated.substr(9, 2);
-        const month = lastUpdated.substr(6, 2);
-        const hour = lastUpdated.substr(12, 5);
+    fetch("https://raw.githubusercontent.com/Dionakra/gog-russian-prices/master/public/lastUpdate.json")
+      .then(response => response.json())
+      .then(data => {
+        const lastUpdated = data.last;
+        const day = lastUpdated.substr(8, 2);
+        const month = lastUpdated.substr(5, 2);
+        const hour = lastUpdated.substr(11, 5);
         this.lastUpdated = `${day}/${month} - ${hour}`;
       });
   },
@@ -124,14 +125,14 @@ export default {
             let res = false;
 
             if (term) {
-              res = game.t.toLowerCase().includes(term.toLowerCase());
+              res = game.title.toLowerCase().includes(term.toLowerCase());
             } else {
-              res = game.s;
+              res = game.sale != undefined;
             }
 
             return res;
           })
-          .sort((a, b) => a.t.toLowerCase().localeCompare(b.t.toLowerCase()))
+          .sort((a, b) => a.title.toLowerCase().localeCompare(b.title.toLowerCase()))
           .slice(0, PAGE * this.curPage);
       }
       this.searching = false;
@@ -140,7 +141,7 @@ export default {
     search: debounce(async function() {
       if (!this.all) {
         const data = await fetch(
-          "https://gogrussianprices.firebaseio.com/products/.json"
+          "https://raw.githubusercontent.com/Dionakra/gog-russian-prices/master/public/games.json"
         ).then(response => response.json());
         this.games = Object.values(data);
         this.all = true;
