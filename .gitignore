@@ -1,6 +1,8 @@
 .DS_Store
 node_modules
 /dist
+.firebase
+package-lock.json
 
 # local env files
 .env.local

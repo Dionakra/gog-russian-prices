@@ -2,7 +2,7 @@
   "hosting": [
     {
       "site": "gogputin",
-      "public": "./dist",
+      "public": "./public",
       "ignore": [
         "firebase.json",
         "**/.*",
@@ -11,7 +11,7 @@
     },
     {
       "site": "gogrussianprices",
-      "public": "./dist",
+      "public": "./public",
       "ignore": [
         "firebase.json",
         "**/.*",
