@@ -13,7 +13,7 @@ npm install
 npm i -g firebase-cli
 
 # Development with Hot Reloading
-npm run start
+npm run dev
 
 # Deploying
 npm run build
