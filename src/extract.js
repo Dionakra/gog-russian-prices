@@ -1,9 +1,9 @@
 const request = require("request")
 const fs = require("fs")
 
-const gamesDB = `${__dirname}/../docs/games.json`
-const salesDB = `${__dirname}/../docs/sales.json`
-const lastUpdate = `${__dirname}/../docs/lastUpdate.json`
+const gamesDB = `${__dirname}/../public/games.json`
+const salesDB = `${__dirname}/../public/sales.json`
+const lastUpdate = `${__dirname}/../public/lastUpdate.json`
 const GRACE_TIME = 750
 
 updateGOGGames(1)
