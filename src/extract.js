@@ -6,7 +6,7 @@ const salesDB = `${__dirname}/../public/sales.json`
 const lastUpdate = `${__dirname}/../public/lastUpdate.json`
 const GRACE_TIME = 750
 
-updateGOGGames(1)
+updateGOGGames()
 
 async function updateGOGGames(maxPages = undefined) {
   console.info(`Retrieving information from GOG with Max Pages set to ${maxPages}`)
