@@ -1,11 +1,12 @@
 name: Auto update DB
 on:
+  push:
   schedule:
-    - cron: '0 1,5,9,13,17,21 * * *'
+    - cron: '0 5,13,21 * * *'
 
 jobs:
   run:
-    name: Update the Collectives DB
+    name: Update games DB
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
@@ -25,9 +26,9 @@ jobs:
       - name: Commit changes
         uses: EndBug/add-and-commit@v5
         with:
-          author_name: David de los Santos Boix
-          author_email: ddlsb@hotmail.com
-          message: 'Updated Collectives DB'
+          author_name: girhub-actions
+          author_email: actions@github.com
+          message: 'Updated GOG Games'
           add: '*.json'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
