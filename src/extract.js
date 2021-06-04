@@ -29,7 +29,6 @@ async function updateGOGGames(maxPages = undefined) {
   } else {
     console.info(" NOTHING CHANGED SINCE LAST RUN, aborting...")
   }
-  
 }
 
 function getGames(country, maxPages) {
@@ -73,8 +72,16 @@ function getGames(country, maxPages) {
 function getGOGData(country, page) {
   return new Promise((resolve, reject) => {
     request(options(country, page), (error, response, body) => {
-      if (error || response.statusCode == 500) reject(error)
-      if (!error && response.statusCode == 200) resolve(JSON.parse(body))
+      if (error || response.statusCode == 500) {
+        reject(error)
+      } else if (!error && response.statusCode == 200 && IsJsonString(body)) {
+        resolve(JSON.parse(body))
+      } else {
+        resolve({
+          totalPages: 1,
+          products: []
+        })
+      }
     })
   })
 }
@@ -124,4 +131,13 @@ function sleep(ms) {
   return new Promise(resolve => {
     setTimeout(resolve, ms)
   })
+}
+
+function IsJsonString(str) {
+  try {
+    JSON.parse(str);
+  } catch (e) {
+    return false;
+  }
+  return true;
 }
